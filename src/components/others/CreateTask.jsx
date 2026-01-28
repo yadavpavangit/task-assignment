@@ -2,7 +2,7 @@ import React from "react";
 
 function CreateTask() {
   return (
-    <div className="max-w-lvw h-screen flex items-center justify-center px-8 my-10 md:my-30">
+    <div className="max-w-lvw h-screen flex items-center justify-center px-8 my-20 md:my-30">
       <form className="bg-gray-800 p-8 rounded-lg w-200">
         <h2 className="text-2xl font-bold text-white mb-6">Create Task</h2>
 
