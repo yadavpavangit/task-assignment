@@ -1,0 +1,95 @@
+import React from "react";
+
+function CreateTask() {
+  return (
+    <div className="max-w-lvw h-screen flex items-center justify-center px-8 my-10 md:my-30">
+      <form className="bg-gray-800 p-8 rounded-lg w-200">
+        <h2 className="text-2xl font-bold text-white mb-6">Create Task</h2>
+
+        {/* Title */}
+        <div className="mb-6">
+          <label htmlFor="taskTitle" className="block text-white text-lg mb-2">
+            Title
+          </label>
+          <input
+            type="text"
+            id="taskTitle"
+            placeholder="Make a UI design"
+            className="w-full px-4 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:border-green-500"
+          />
+        </div>
+
+        {/* Description */}
+        <div className="mb-6">
+          <label
+            htmlFor="description"
+            className="block text-white text-lg mb-2"
+          >
+            Description
+          </label>
+          <textarea
+            id="description"
+            placeholder="Describe the task"
+            rows="4"
+            className="w-full px-4 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:border-green-500"
+          />
+        </div>
+
+        {/* Date */}
+        <div className="mb-6">
+          <label htmlFor="date" className="block text-white text-lg mb-2">
+            Date
+          </label>
+          <input
+            type="date"
+            id="date"
+            className="w-full px-4 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:border-green-500"
+          />
+        </div>
+
+        {/* Assign To */}
+        <div className="mb-6">
+          <label htmlFor="assignTo" className="block text-white text-lg mb-2">
+            Assign To
+          </label>
+          <select
+            id="assignTo"
+            className="w-full px-4 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:border-green-500"
+          >
+            <option value="">Select Employee</option>
+            <option value="emp1">Employee 1</option>
+            <option value="emp2">Employee 2</option>
+            <option value="emp3">Employee 3</option>
+          </select>
+        </div>
+
+        {/* Category */}
+        <div className="mb-6">
+          <label htmlFor="category" className="block text-white text-lg mb-2">
+            Category
+          </label>
+          <select
+            id="category"
+            className="w-full px-4 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:border-green-500"
+          >
+            <option value="">Select Category</option>
+            <option value="design">Design</option>
+            <option value="development">Development</option>
+            <option value="testing">Testing</option>
+            <option value="documentation">Documentation</option>
+          </select>
+        </div>
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition"
+        >
+          Create Task
+        </button>
+      </form>
+    </div>
+  );
+}
+
+export default CreateTask;
