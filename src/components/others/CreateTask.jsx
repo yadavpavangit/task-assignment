@@ -1,6 +1,20 @@
-import React from "react";
+import { useContext } from "react";
+import Select from "react-select";
+import { AuthContext } from "../../context/AuthProvider";
+
+const options = [
+  { value: "chocolate", label: "Chocolate" },
+  { value: "strawberry", label: "Strawberry" },
+  { value: "vanilla", label: "Vanilla" },
+];
 
 function CreateTask() {
+  const { employees } = useContext(AuthContext);
+  const options = employees.map((emp) => ({
+    value: emp.id,
+    label: emp.firstName,
+  }));
+
   return (
     <div className="max-w-lvw h-screen flex items-center justify-center px-8 my-20 md:my-30">
       <form className="bg-gray-800 p-8 rounded-lg w-200">
@@ -52,15 +66,13 @@ function CreateTask() {
           <label htmlFor="assignTo" className="block text-white text-lg mb-2">
             Assign To
           </label>
-          <select
+
+          <Select
             id="assignTo"
-            className="w-full px-4 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:border-green-500"
-          >
-            <option value="">Select Employee</option>
-            <option value="emp1">Employee 1</option>
-            <option value="emp2">Employee 2</option>
-            <option value="emp3">Employee 3</option>
-          </select>
+            className="w-full px-4 py-2 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none focus:border-green-500"
+            options={options}
+            placeholder="Select Employee"
+          />
         </div>
 
         {/* Category */}
