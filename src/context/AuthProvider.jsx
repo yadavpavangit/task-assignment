@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { getLocalStorage } from "../utils/LocalStorage";
+import { getLocalStorage, setLocalStorage } from "../utils/LocalStorage";
 
 export const AuthContext = createContext();
 
@@ -12,6 +12,16 @@ function AuthProvider({ children }) {
     loading: true,
   });
 
+  const addTaskToEmployee = (employeeId, task) => {
+    setAuth((prev) => {
+      const updatedEmployees = prev.employees.map((emp) =>
+        emp.id === employeeId ? { ...emp, tasks: [...emp.tasks, task] } : emp,
+      );
+
+      return { ...prev, employees: updatedEmployees };
+    });
+  };
+
   useEffect(() => {
     const { employees, admin } = getLocalStorage();
     const storedUser = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -23,6 +33,10 @@ function AuthProvider({ children }) {
       loading: false,
     });
   }, []);
+
+  // useEffect(() => {
+  //   localStorage.setItem("employees", JSON.stringify(auth.employees));
+  // }, [auth.employees]);
 
   const login = (email, password) => {
     const admin = auth.admin.find(
@@ -74,7 +88,7 @@ function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ ...auth, login, logout }}>
+    <AuthContext.Provider value={{ ...auth, addTaskToEmployee, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

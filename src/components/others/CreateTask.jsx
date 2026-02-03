@@ -1,23 +1,59 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Select from "react-select";
 import { AuthContext } from "../../context/AuthProvider";
-
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
+import { setLocalStorage } from "../../utils/LocalStorage";
 
 function CreateTask() {
-  const { employees } = useContext(AuthContext);
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    date: "",
+    assignTo: null,
+    category: "",
+  });
+
+  const { employees, addTaskToEmployee } = useContext(AuthContext);
   const options = employees.map((emp) => ({
     value: emp.id,
     label: emp.firstName,
   }));
 
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    if (!formData.assignTo) return alert("select employee");
+
+    const newTask = {
+      title: formData.title,
+      description: formData.description,
+      date: formData.date,
+      category: formData.category,
+      status: "new",
+    };
+
+    addTaskToEmployee(formData.assignTo.value, newTask);
+
+    setFormData({
+      title: "",
+      description: "",
+      date: "",
+      category: "",
+      assignTo: null,
+    });
+
+    alert("Task created successfully ✅");
+  };
+
   return (
-    <div className="max-w-lvw h-screen flex items-center justify-center px-8 my-20 md:my-30">
-      <form className="bg-gray-800 p-8 rounded-lg w-200">
+    <div className="max-w-lvw flex items-center justify-center px-8 my-20 md:my-30">
+      <form
+        className="bg-gray-800 p-8 rounded-lg w-200"
+        onSubmit={handleFormSubmit}
+      >
         <h2 className="text-2xl font-bold text-white mb-6">Create Task</h2>
 
         {/* Title */}
@@ -28,6 +64,9 @@ function CreateTask() {
           <input
             type="text"
             id="taskTitle"
+            name="title"
+            value={formData.title}
+            onChange={handleInputChange}
             placeholder="Make a UI design"
             className="w-full px-4 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:border-green-500"
           />
@@ -43,6 +82,9 @@ function CreateTask() {
           </label>
           <textarea
             id="description"
+            name="description"
+            value={formData.description}
+            onChange={handleInputChange}
             placeholder="Describe the task"
             rows="4"
             className="w-full px-4 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:border-green-500"
@@ -57,6 +99,9 @@ function CreateTask() {
           <input
             type="date"
             id="date"
+            name="date"
+            value={formData.date}
+            onChange={handleInputChange}
             className="w-full px-4 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:border-green-500"
           />
         </div>
@@ -69,6 +114,9 @@ function CreateTask() {
 
           <Select
             id="assignTo"
+            name="assignTo"
+            value={formData.assignTo}
+            onChange={(val) => setFormData({ ...formData, assignTo: val })}
             className="w-full px-4 py-2 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none focus:border-green-500"
             options={options}
             placeholder="Select Employee"
@@ -82,6 +130,9 @@ function CreateTask() {
           </label>
           <select
             id="category"
+            name="category"
+            value={formData.category}
+            onChange={handleInputChange}
             className="w-full px-4 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:border-green-500"
           >
             <option value="">Select Category</option>
@@ -95,7 +146,7 @@ function CreateTask() {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition"
+          className="w-full bg-green-600 hover:bg-green-600/90 text-white font-bold py-2 px-4 rounded-lg transition active:scale-95"
         >
           Create Task
         </button>
