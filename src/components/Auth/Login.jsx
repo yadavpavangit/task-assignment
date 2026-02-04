@@ -1,6 +1,5 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthProvider";
-import { setLocalStorage } from "../../utils/LocalStorage";
 
 function Login() {
   const { login } = useContext(AuthContext);
