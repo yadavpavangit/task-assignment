@@ -1,7 +1,6 @@
 import React from "react";
 
 function AcceptTask({ item }) {
-  console.log(item);
   return (
     <div
       key={item.id}

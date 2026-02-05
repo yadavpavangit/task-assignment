@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import Select from "react-select";
 import { AuthContext } from "../../context/AuthProvider";
 import { setLocalStorage } from "../../utils/LocalStorage";
+import { Bounce, toast } from "react-toastify";
 
 function CreateTask() {
   const [formData, setFormData] = useState({
@@ -28,6 +29,7 @@ function CreateTask() {
     if (!formData.assignTo) return alert("select employee");
 
     const newTask = {
+      id: Date.now(),
       title: formData.title,
       description: formData.description,
       date: formData.date,
@@ -45,7 +47,17 @@ function CreateTask() {
       assignTo: null,
     });
 
-    alert("Task created successfully ✅");
+    toast.success("Task created, successfully!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
   };
 
   return (

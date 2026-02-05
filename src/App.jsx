@@ -4,6 +4,7 @@ import EmployeeDashboard from "./components/Dashboard/EmployeeDashboard";
 import AdminDashboard from "./components/Dashboard/AdminDashboard";
 import { AuthContext } from "./context/AuthProvider";
 import { setLocalStorage } from "./utils/LocalStorage";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   // localStorage.removeItem("employees");
@@ -24,6 +25,7 @@ function App() {
       ) : (
         ""
       )}
+      <ToastContainer />
     </>
   );
 }

@@ -9,12 +9,14 @@ function TaskList({ tasks = [] }) {
     active: AcceptTask,
     completed: Complete,
   };
+
   return (
     <div
       id="taskList"
-      className="h-[50%] overflow-x-auto flex flex-col md:flex-row items-center justify-center gap-9 flex-nowrap w-full py-1 mt-16"
+      className="h-[50%] overflow-x-auto flex gap-6 flex-nowrap items-start snap-x snap-mandatory"
     >
       {tasks.map((task) => {
+        console.log(task);
         const Component = taskComponents[task.status];
         return <Component key={task.id} item={task} />;
       })}
