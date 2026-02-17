@@ -47,7 +47,7 @@ function CreateTask() {
       assignTo: null,
     });
 
-    toast.success("Task created, successfully!", {
+    toast.success(`Task created, successfully! ${formData.assignTo.value}`, {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,

@@ -6,6 +6,13 @@ const employees = [
     firstName: "Arjun",
     email: "e@e.com",
     password: "123",
+
+    taskCount: {
+      new: 1,
+      active: 1,
+      completed: 1,
+    },
+
     tasks: [
       {
         id: 101,
@@ -39,11 +46,18 @@ const employees = [
     firstName: "Sneha",
     email: "employee2@example.com",
     password: "123",
+
+    taskCount: {
+      new: 0,
+      active: 1,
+      completed: 1,
+    },
+
     tasks: [
       {
         id: 201,
         title: "Database optimization",
-        description: "Optimize queries for better performance",
+        description: "Optimize queries",
         date: "2024-10-11",
         category: "Database",
         status: "active",
@@ -51,7 +65,7 @@ const employees = [
       {
         id: 202,
         title: "Design new feature",
-        description: "Create mockups for the new feature",
+        description: "Create mockups",
         date: "2024-10-09",
         category: "Design",
         status: "completed",
@@ -64,6 +78,13 @@ const employees = [
     firstName: "Ravi",
     email: "employee3@example.com",
     password: "123",
+
+    taskCount: {
+      new: 1,
+      active: 1,
+      completed: 1,
+    },
+
     tasks: [
       {
         id: 301,
@@ -106,7 +127,6 @@ const admin = [
 export const setLocalStorage = () => {
   if (!localStorage.getItem("employees")) {
     localStorage.setItem("employees", JSON.stringify(employees));
-    console.log("first");
   }
 
   if (!localStorage.getItem("admin")) {

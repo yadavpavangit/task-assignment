@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { getLocalStorage } from "../utils/LocalStorage";
+import { calculateTaskCount } from "../utils/taskCount";
 
 export const AuthContext = createContext();
 
@@ -26,10 +27,21 @@ function AuthProvider({ children }) {
 
   const addTaskToEmployee = (empId, task) => {
     setAuth((prev) => {
-      const updatedEmployees = prev.employees.map((emp) =>
-        emp.id === empId ? { ...emp, tasks: [...emp.tasks, task] } : emp,
-      );
+      const updatedEmployees = prev.employees.map((emp) => {
+        if (emp.id === empId) {
+          const updatedTasks = [...emp.tasks, task];
+
+          return {
+            ...emp,
+            tasks: updatedTasks,
+            taskCount: calculateTaskCount(updatedTasks),
+          };
+        }
+        return emp;
+      });
+
       localStorage.setItem("employees", JSON.stringify(updatedEmployees));
+
       return { ...prev, employees: updatedEmployees };
     });
   };

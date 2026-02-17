@@ -13,8 +13,6 @@ function App() {
 
   if (loading) return <div>Loading...</div>;
 
-  // console.log({ employees, admin });
-
   return (
     <>
       {!user && <Login />}
